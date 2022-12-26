@@ -27,21 +27,36 @@ const crearNuevaLinea = (nombre, email) => {
 };
 
 const table = document.querySelector("[data-table]");
-const http = new XMLHttpRequest();
 
-// inicializa una solicitud recién creada o reinicializa una existente.
-//recibe un metodo y una url
-http.open("GET", "http://localhost:3000/perfil");
+const ListaClientes = () => {
+  const promise = new Promise((resolve, reject) => {
+    const http = new XMLHttpRequest();
 
-//envía la solicitud al servidor.
-http.send();
+    // inicializa una solicitud recién creada o reinicializa una existente.
+    //recibe un metodo y una url
+    http.open("GET", "http://localhost:3000/perfil");
 
-//Ejecuta la funcion flecha cuando http se  ha cargado
-http.onload = () => {
-  const data = JSON.parse(http.response);
-  data.forEach((perfil) => {
-    const nuevaLinea = crearNuevaLinea(perfil.nombre, perfil.email);
-    table.appendChild(nuevaLinea);
+    //envía la solicitud al servidor.
+    http.send();
+
+    //Ejecuta la funcion flecha cuando http se  ha cargado
+    http.onload = () => {
+      const response = JSON.parse(http.response);
+      if (http.status >= 400) {
+        reject(response);
+      } else {
+        resolve(response);
+      }
+    };
   });
-  console.log(data);
+  return promise;
 };
+
+ListaClientes()
+  .then((data) => {
+    data.forEach((perfil) => {
+      const nuevaLinea = crearNuevaLinea(perfil.nombre, perfil.email);
+      table.appendChild(nuevaLinea);
+    });
+  })
+  .catch((_error) => alert("Ocurrió un error"));
