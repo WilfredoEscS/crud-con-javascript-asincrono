@@ -28,29 +28,10 @@ const crearNuevaLinea = (nombre, email) => {
 
 const table = document.querySelector("[data-table]");
 
-const ListaClientes = () => {
-  const promise = new Promise((resolve, reject) => {
-    const http = new XMLHttpRequest();
-
-    // inicializa una solicitud recién creada o reinicializa una existente.
-    //recibe un metodo y una url
-    http.open("GET", "http://localhost:3000/perfil");
-
-    //envía la solicitud al servidor.
-    http.send();
-
-    //Ejecuta la funcion flecha cuando http se  ha cargado
-    http.onload = () => {
-      const response = JSON.parse(http.response);
-      if (http.status >= 400) {
-        reject(response);
-      } else {
-        resolve(response);
-      }
-    };
-  });
-  return promise;
-};
+//Hace una conexion con la URL y genera una promesa
+//Al completarse la promesa la devuelve y transforma a JSON
+const ListaClientes = () =>
+  fetch("http://localhost:3000/perfil").then((respuesta) => respuesta.json());
 
 ListaClientes()
   .then((data) => {
