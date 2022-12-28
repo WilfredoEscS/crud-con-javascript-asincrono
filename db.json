@@ -1,6 +1,11 @@
 {
   "perfil": [
     {
+      "nombre": "Wilfredo Escobar",
+      "email": "wilfredo@mail.com",
+      "id": "822f29fe-1b81-44e7-b8ca-5d5d0b0996d9"
+    },
+    {
       "nombre": "Javier Escobar",
       "email": "javier@mail.com",
       "id": "168599e9-a16e-4827-9c75-673108cb2dca"

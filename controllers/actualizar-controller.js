@@ -1,0 +1,19 @@
+import { clientServices } from "../services/client-services.js";
+
+const obtenerInformacion = () => {
+  //Crea una instancia de la clase URL
+  const url = new URL(window.location);
+  // Obtiene el id de la URLmediante la propiedad searchParams
+  const id = url.searchParams.get("id");
+
+  if (id === null) window.location.href = "/screens/error.html";
+
+  const nombre = document.querySelector("[data-nombre]");
+  const email = document.querySelector("[data-email]");
+  console.log(nombre, " - ", email);
+  clientServices.detalleCliente(id).then((perfil) => {
+    nombre.value = perfil.nombre;
+    email.value = perfil.email;
+  });
+};
+obtenerInformacion();
