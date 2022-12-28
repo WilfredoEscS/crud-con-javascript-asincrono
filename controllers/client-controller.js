@@ -41,7 +41,7 @@ const crearNuevaLinea = (nombre, email, id) => {
 const table = document.querySelector("[data-table]");
 
 clientServices
-  .ListaClientes()
+  .listaClientes()
   .then((data) => {
     data.forEach(({ nombre, email, id }) => {
       const nuevaLinea = crearNuevaLinea(nombre, email, id);

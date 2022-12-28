@@ -1,6 +1,6 @@
 //Hace una conexion con la URL y genera una promesa
 //Al completarse la promesa la devuelve y transforma a JSON
-const ListaClientes = () =>
+const listaClientes = () =>
   fetch("http://localhost:3000/perfil").then((respuesta) => respuesta.json());
 
 const crearCliente = (nombre, email) => {
@@ -23,7 +23,7 @@ const eliminarCliente = (id) => {
 };
 
 export const clientServices = {
-  ListaClientes,
+  listaClientes,
   crearCliente,
   eliminarCliente,
 };
